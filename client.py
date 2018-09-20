@@ -16,3 +16,6 @@ def main():
     s.connect((ip, port))
     print("Connection to Server Established")
     s.close()
+
+if __name__ == "__main__":
+    main()
