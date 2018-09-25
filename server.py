@@ -18,10 +18,15 @@ def main():
     s.listen(1)
 
     conn, addr = s.accept()
-    print('Server Address:', ip)
-    print('Client Address:', addr)
-    print("Connection Established...Closing")
-    conn.close()
+    with conn:
+        print("Connected from: ", addr)
+        while True:
+            data = conn.recv(1024)
+            print(data)
+            if not data:
+                break
+            conn.sendall(data)
+
 
 
 if __name__ == "__main__":
