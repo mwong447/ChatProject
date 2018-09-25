@@ -13,9 +13,17 @@ def main():
     ip, port = parse_args()
     print("Attempting to connect to server at: ", ip, "Port:", port)
     s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.connect((ip, port))
-    print("Connection to Server Established")
-    s.close()
+    x = bytearray(str(input('Enter the string you want to send:')), encoding='UTF-8')
+    with s:
+        s.connect((ip, port))
+        while x != b'quit':
+            s.sendall(x)
+            data = s.recv(1024)
+            print("Received", repr(data))
+            x = bytearray(str(input('Enter the string you want to send:')), encoding='UTF-8')
+
+
+
 
 if __name__ == "__main__":
     main()
